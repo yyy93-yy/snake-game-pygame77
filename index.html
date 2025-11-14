@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇游戏 - Snake Game</title>
+    <meta name="description" content="一个经典的贪吃蛇游戏，支持多种难度级别，现代化的界面设计">
+    <meta name="keywords" content="贪吃蛇,游戏,snake,game,html5,javascript">
+    <meta name="author" content="yyy93-yy">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="贪吃蛇游戏 - Snake Game">
+    <meta property="og:description" content="一个经典的贪吃蛇游戏，支持多种难度级别，现代化的界面设计">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(console.error);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="game-container">
+        <!-- 游戏头部 -->
+        <header class="game-header">
+            <h1 class="game-title">🐍 贪吃蛇游戏</h1>
+            <p class="game-subtitle">使用方向键或WASD控制蛇的移动</p>
+        </header>
+        
+        <!-- 游戏信息面板 -->
+        <section class="game-info">
+            <div class="score-panel">
+                <div class="score-item">
+                    <div class="score-label">当前得分</div>
+                    <div class="score-value" id="score">0</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-label">最高得分</div>
+                    <div class="score-value" id="high-score">0</div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <select class="difficulty-selector" id="difficulty">
+                    <option value="easy">简单</option>
+                    <option value="normal" selected>普通</option>
+                    <option value="hard">困难</option>
+                    <option value="extreme">极限</option>
+                </select>
+                
+                <button class="btn btn-start" id="startBtn">开始游戏</button>
+                <button class="btn btn-pause" id="pauseBtn" disabled>暂停</button>
+                <button class="btn btn-restart" id="restartBtn">重新开始</button>
+            </div>
+        </section>
+        
+        <!-- 游戏画布 -->
+        <main class="game-canvas-container">
+            <canvas id="gameCanvas" width="600" height="600"></canvas>
+            
+            <!-- 游戏覆盖层 -->
+            <div class="game-overlay" id="gameOverlay">
+                <h2 class="overlay-title" id="overlayTitle">准备开始</h2>
+                <p class="overlay-message" id="overlayMessage">按空格键或点击开始按钮</p>
+                <button class="overlay-start-btn" id="overlayStartBtn">开始游戏</button>
+            </div>
+        </main>
+        
+        <!-- 操作指南 -->
+        <section class="instructions">
+            <h2 class="instructions-title">🎮 操作指南</h2>
+            <div class="instructions-grid">
+                <div class="instruction-item">
+                    <div class="instruction-icon">⬆️</div>
+                    <div class="instruction-text">向上移动：W键 或 ↑键</div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">⬇️</div>
+                    <div class="instruction-text">向下移动：S键 或 ↓键</div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">⬅️</div>
+                    <div class="instruction-text">向左移动：A键 或 ←键</div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">➡️</div>
+                    <div class="instruction-text">向右移动：D键 或 →键</div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">⏸️</div>
+                    <div class="instruction-text">暂停/继续：空格键</div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-icon">🔄</div>
+                    <div class="instruction-text">重新开始：R键</div>
+                </div>
+            </div>
+            
+            <!-- 游戏特性 -->
+            <div class="features">
+                <div class="feature-badge">
+                    <span class="feature-icon">🎯</span>
+                    <span>精确控制</span>
+                </div>
+                <div class="feature-badge">
+                    <span class="feature-icon">🏆</span>
+                    <span>最高分记录</span>
+                </div>
+                <div class="feature-badge">
+                    <span class="feature-icon">⚡</span>
+                    <span>多种难度</span>
+                </div>
+                <div class="feature-badge">
+                    <span class="feature-icon">📱</span>
+                    <span>触屏支持</span>
+                </div>
+                <div class="feature-badge">
+                    <span class="feature-icon">🎨</span>
+                    <span>现代界面</span>
+                </div>
+                <div class="feature-badge">
+                    <span class="feature-icon">🔊</span>
+                    <span>音效反馈</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 页脚 -->
+        <footer class="game-footer">
+            <p>使用 <a href="https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection" target="_blank" class="footer-link">HTML5 Canvas</a> 技术构建</p>
+            <p>© 2024 贪吃蛇游戏 | 由 <a href="https://github.com/yyy93-yy" target="_blank" class="footer-link">yyy93-yy</a> 开发</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
