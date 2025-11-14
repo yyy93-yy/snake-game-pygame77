@@ -26,7 +26,7 @@ echo 📤 推送到GitHub...
 git push origin main
 
 echo ✅ 部署完成！
-echo 🌐 游戏地址：https://yyy93yy.github.io/snake-game/
+echo 🌐 游戏地址：https://yyy93-yy.github.io/snake-game-pygame77/
 echo ⏳ GitHub Pages可能需要几分钟时间来构建...
 
 pause

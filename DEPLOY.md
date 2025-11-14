@@ -40,7 +40,7 @@ git push -u origin main
 
 GitHub Pages会自动构建你的网站，通常需要1-5分钟。构建完成后，你可以在Pages设置页面看到你的网站地址：
 
-**https://yyy93yy.github.io/snake-game/**
+**https://yyy93-yy.github.io/snake-game-pygame77/**
 
 ## 🛠️ 快速部署脚本
 

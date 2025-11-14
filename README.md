@@ -49,7 +49,7 @@ python -m http.server 8000
 ## 📱 在线游玩
 
 访问GitHub Pages页面直接在线游玩：
-https://yyy93yy.github.io/snake-game/
+https://yyy93-yy.github.io/snake-game-pygame77/
 
 ## 🛠️ 技术栈
 
